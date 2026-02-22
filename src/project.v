@@ -68,7 +68,7 @@ module tt_um_ashergitscrazy (
 
       RUN: begin
         // This changes remainder to be remainder with leading digit pair of input appended
-        remainder_next = (remainder << 2) | root[7:6];
+        remainder_next = (root << 2) | remainder[7:6];
         // Prepares 2R + 1, this multiplies root by 2 and changes LSB to 1
         test_num = (root << 1) | 1'b1;
 
