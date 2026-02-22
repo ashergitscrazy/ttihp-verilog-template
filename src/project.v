@@ -23,12 +23,14 @@ module tt_um_ashergitscrazy (
 
   reg [1:0] state, next_state;
 
-  reg [8:0] remainder, remainder_next;
+  reg [7:0] remainder, remainder_next;
   reg [7:0] root, root_next;
   reg [1:0] counter, counter_next;
 
   reg [4:0] test_num;
 
+  assign uo_out = root;
+  
   always @(posedge clk) begin
 
     if (!rst_n) begin
@@ -87,7 +89,6 @@ module tt_um_ashergitscrazy (
       end
 
       DONE: begin
-        uo_out = root;
         next_state = IDLE;
       end
       
