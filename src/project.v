@@ -23,7 +23,7 @@ module tt_um_ashergitscrazy (
 
   reg [1:0] state, next_state;
 
-  reg [7:0] remainder, remainder_next;
+  reg [9:0] remainder, remainder_next;
   reg [7:0] root, root_next;
   reg [1:0] counter, counter_next;
 
