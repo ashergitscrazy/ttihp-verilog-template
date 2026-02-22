@@ -69,12 +69,12 @@ module tt_um_ashergitscrazy (
         // This changes remainder to be remainder with leading digit pair of input appended
         remainder_next = (remainder << 2) | root[7:6];
         // Prepares 2R + 1, this multiplies root by 2 and changes LSB to 1
-        test_num = (root << 1) | 1;
+        test_num = (root << 1) | 1'b1;
 
         // Condition: remainder - test_num is non-negative, so subtraction is allowed
-        if (remainder_next >= test_num) begin
-            remainder_next = remainder_next - test_num;
-            root = (root << 1) | 1;
+        if (remainder >= test_num) begin
+            remainder_next = remainder - test_num;
+            root = (root << 1) | 1'b1;
         end
         
         // Result would be negative, so multiplying root by 2 again
