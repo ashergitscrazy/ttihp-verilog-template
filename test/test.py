@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import cocotb
+import logging
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 
