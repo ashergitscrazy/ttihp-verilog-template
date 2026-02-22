@@ -28,8 +28,6 @@ module tt_um_ashergitscrazy (
   reg [1:0] counter, counter_next;
 
   reg [4:0] test_num;
-
-  assign uo_out = root;
   
   always @(posedge clk) begin
 
@@ -46,6 +44,8 @@ module tt_um_ashergitscrazy (
     end
 
   end
+
+  assign uo_out = root;
 
   always @(*) begin
 
