@@ -58,8 +58,9 @@ module tt_um_ashergitscrazy (
 
       IDLE: begin
         if (ena) begin
+          remainder = ui_in;
           remainder_next = 0;
-          root_next = ui_in;
+          root_next = 0;
           counter_next = 0;
           next_state = RUN;
         end
@@ -72,8 +73,8 @@ module tt_um_ashergitscrazy (
         test_num = (root << 1) | 1'b1;
 
         // Condition: remainder - test_num is non-negative, so subtraction is allowed
-        if (remainder >= test_num) begin
-            remainder_next = remainder - test_num;
+        if (remainder_next >= test_num) begin
+            remainder_next = remainder_next - test_num;
             root = (root << 1) | 1'b1;
         end
         
