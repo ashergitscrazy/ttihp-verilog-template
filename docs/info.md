@@ -9,11 +9,11 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+Uses binary digit by digit algorithm to compute integer square root of 8 bit input
 
 ## How to test
 
-Explain how to use your project
+Cocotb
 
 ## External hardware
 
