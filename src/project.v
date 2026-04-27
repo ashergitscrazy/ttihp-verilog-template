@@ -4,6 +4,7 @@
  */
 
 `default_nettype none
+`timescale 1ns/1ps
 
 module tt_um_ashergitscrazy (
     input  wire [7:0] ui_in,    // Dedicated inputs
@@ -25,13 +26,12 @@ module tt_um_ashergitscrazy (
 
   reg [9:0] remainder, remainder_next;
   reg [7:0] root, root_next;
-  reg [7:0] input_shift, input_shift_next
-  reg [1:0] counter, counter_next;
+  reg [7:0] input_shift, input_shift_next;
+  reg [2:0] counter, counter_next;
 
   reg [9:0] test_num;
   
-  always @(posedge clk) begin
-
+  always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
       state <= IDLE;
       remainder <= 0;
@@ -56,6 +56,7 @@ module tt_um_ashergitscrazy (
     remainder_next = remainder;
     root_next = root;
     counter_next = counter;
+    input_shift_next = input_shift;
 
     case(state)
 
@@ -75,7 +76,7 @@ module tt_um_ashergitscrazy (
         // Prepares next two bits for following iteration
         input_shift_next = input_shift << 2;
         // Prepares 2R + 1, this multiplies root by 2 and changes LSB to 1
-        test_num = (root << 1) | 1;
+        test_num = (root << 2) | 1;
 
         // Condition: remainder - test_num is non-negative, so subtraction is allowed
         if (remainder_next >= test_num) begin
@@ -94,6 +95,8 @@ module tt_um_ashergitscrazy (
 
       DONE: begin
         next_state = IDLE;
+        $display("t=%0t ui_in=%d root=%d",
+        $time, ui_in, root);
       end
       
 
