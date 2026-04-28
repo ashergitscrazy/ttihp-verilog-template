@@ -95,8 +95,7 @@ module tt_um_ashergitscrazy (
 
       DONE: begin
         next_state = IDLE;
-        $display("t=%0t ui_in=%d root=%d",
-        $time, ui_in, root);
+        $display("t=%0t ui_in=%d root=%d", ui_in, root);
       end
       
 
