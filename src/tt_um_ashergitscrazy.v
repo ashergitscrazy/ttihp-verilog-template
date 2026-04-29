@@ -72,11 +72,11 @@ module tt_um_ashergitscrazy (
 
       RUN: begin
         // This changes remainder to be remainder with leading digit pair of input appended
-        remainder_next = (remainder << 2) | input_shift[7:6];
+        remainder_next = (remainder << 2) | {8'b0, input_shift[7:6]};
         // Prepares next two bits for following iteration
         input_shift_next = input_shift << 2;
         // Prepares 2R + 1, this multiplies root by 2 and changes LSB to 1
-        test_num = (root << 2) | 1;
+        test_num = (root << 2) | {9'b0, 1'b1};
 
         // Condition: remainder - test_num is non-negative, so subtraction is allowed
         if (remainder_next >= test_num) begin
@@ -97,6 +97,7 @@ module tt_um_ashergitscrazy (
         next_state = IDLE;
       end
       
+      default: next_state = IDLE;
 
     endcase
 
