@@ -6,10 +6,14 @@
 `default_nettype none
 //`timescale 1ns/1ps
 
+/* verilator lint_off DECLFILENAME */
 module tt_um_ashergitscrazy (
+/* lint_on */
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
+    output wire [7:0] uio_out,  // IOs: Output path
+    output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // always 1 when the design is powered, so you can ignore it
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
@@ -74,7 +78,7 @@ module tt_um_ashergitscrazy (
         // Prepares next two bits for following iteration
         input_shift_next = input_shift << 2;
         // Prepares 2R + 1, this multiplies root by 2 and changes LSB to 1
-        test_num = (root << 2) | {9'b0, 1'b1};
+        test_num = ({2'b00, root} << 2) | {9'b0, 1'b1};
 
         // Condition: remainder - test_num is non-negative, so subtraction is allowed
         if (remainder_next >= test_num) begin
@@ -100,5 +104,10 @@ module tt_um_ashergitscrazy (
     endcase
 
   end
-  
+
+  assign uio_oe = 8'b0;
+  assign uio_out = {7'b0, &{uio_in, uio_oe, 1'b0}};
+
 endmodule
+
+`default_nettype wire
