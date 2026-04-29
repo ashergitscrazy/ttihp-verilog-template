@@ -9,6 +9,7 @@
 module tt_um_ashergitscrazy (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
+    input  wire [7:0] uio_in,   // IOs: Input path
     input  wire       ena,      // always 1 when the design is powered, so you can ignore it
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
@@ -99,5 +100,5 @@ module tt_um_ashergitscrazy (
     endcase
 
   end
-
+  
 endmodule
